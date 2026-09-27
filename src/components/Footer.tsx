@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShieldCheck } from "lucide-react";
+import { Shield, ShieldCheck, Award } from "lucide-react";
 
 interface FooterProps {
   onOpenLearner?: () => void;
@@ -32,9 +32,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo }) => {
               NexaDhi by Neuronexa is an AI-powered platform that connects verified engineering talent
               with companies and institutions through skill-based assessments and smart recruitment tools.
             </p>
-            <div className="flex items-center gap-2 text-xs text-slate-500 pt-1 font-sans">
-              <ShieldCheck className="size-4 text-[#16A34A] shrink-0" />
-              <span>Enterprise Grade • SOC2 Compliant • ISO/IEC 27001 Ready</span>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-xs text-slate-500 pt-1 font-sans">
+              <div className="flex items-center gap-1.5">
+                <Shield className="size-3.5 text-[#16A34A] shrink-0" />
+                <span>Enterprise Grade</span>
+              </div>
+              <span className="hidden sm:inline text-slate-300">•</span>
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck className="size-3.5 text-[#16A34A] shrink-0" />
+                <span>SOC2 Compliant</span>
+              </div>
+              <span className="hidden sm:inline text-slate-300">•</span>
+              <div className="flex items-center gap-1.5">
+                <Award className="size-3.5 text-[#16A34A] shrink-0" />
+                <span>ISO/IEC 27001 Ready</span>
+              </div>
             </div>
           </div>
         </div>
