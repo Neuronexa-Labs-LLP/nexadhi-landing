@@ -8,9 +8,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
-  deploy:
-    # if: github.event.pull_request.merged == true
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,27 +22,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci || npm install
 
-      - name: Build project
+      - name: Build static export
         run: npm run build
 
-      - name: Configure Git identity
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Set remote URL to use token
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-      - name: Add CNAME file for custom domain
-        run: echo "nexadhi.com" > out/CNAME
-
       - name: Deploy to GitHub Pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          cname: nexadhi.com

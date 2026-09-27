@@ -350,8 +350,8 @@ function hslToRgb(h: number, s: number, l: number): Vec3 {
 function hexToVec3(color: string): Vec3 {
   if (color.startsWith('#')) {
     const hex = color.slice(1);
-    const fullHex = hex.length === 3 
-      ? hex.split('').map(c => c + c).join('') 
+    const fullHex = hex.length === 3
+      ? hex.split('').map(c => c + c).join('')
       : hex;
     const r = parseInt(fullHex.slice(0, 2), 16) / 255;
     const g = parseInt(fullHex.slice(2, 4), 16) / 255;
