@@ -14,18 +14,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo }) => {
   return (
     <footer className="bg-[#F8FAFC] border-t border-slate-200 text-[#334155] text-sm">
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="flex flex-col md:flex-row items-start justify-between gap-10 md:gap-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-10">
 
           {/* Brand Info */}
-          <div className="space-y-4 max-w-lg">
+          <div className="max-w-lg">
             <Link href="/" className="inline-block">
               <Image
                 src="/logo.png"
                 alt="NexaDhi"
                 width={280}
                 height={90}
-                className="h-16 sm:h-20 w-auto object-contain"
+                className="h-16 sm:h-20 w-auto object-cover"
               />
             </Link>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-sans">
