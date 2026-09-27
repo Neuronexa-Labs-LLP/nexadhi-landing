@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   ArrowRight,
 } from "lucide-react";
-import { toast } from "sonner";
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -38,11 +37,6 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!workEmail || !orgName) {
-      toast.error(
-        orgType === "enterprise"
-          ? "Please provide company name and email"
-          : "Please provide institute name and email"
-      );
       return;
     }
 
@@ -69,7 +63,6 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
       if (response.ok && result.success !== "false") {
         setIsSubmitting(false);
         setIsSubmitted(true);
-        toast.success(`Priority demo slot queued for ${orgName}!`);
       } else {
         console.error("Submission rejected by server:", result);
         alert("Message delivery failed. Please contact us directly on WhatsApp at +91 91104 35020.");

@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, GraduationCap, School, Building2 } from "lucide-react";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 interface LearnerModalProps {
@@ -30,7 +29,6 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !fullName) {
-      toast.error("Please fill in all required fields");
       return;
     }
 
@@ -62,7 +60,6 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
       if (response.ok && result.success !== "false") {
         setIsSubmitting(false);
         setIsSubmitted(true);
-        toast.success("Welcome aboard! Your spot in NexaDhi Early Access is locked in.");
       } else {
         console.error("Submission rejected by server:", result);
         alert("Message delivery failed. Please contact us directly on WhatsApp at +91 91104 35020.");

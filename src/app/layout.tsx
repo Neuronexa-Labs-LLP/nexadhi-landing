@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Sora, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
 
 const sora = Sora({
   weight: ["400", "500", "600", "700", "800"],
@@ -137,7 +136,6 @@ export default function RootLayout({
         className="min-h-screen bg-[#F8FAFC] text-[#334155] font-sans antialiased selection:bg-[#7C3AED]/20 selection:text-[#312E81] flex flex-col overflow-x-hidden"
       >
         {children}
-        <Toaster position="top-right" richColors />
       </body>
     </html>
   );
