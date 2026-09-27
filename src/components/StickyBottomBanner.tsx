@@ -44,16 +44,15 @@ export const StickyBottomBanner: React.FC<StickyBottomBannerProps> = ({
             variant="primary"
             size="sm"
             onClick={onOpenLearner}
-            className="h-7.5 sm:h-8.5 px-3 sm:px-4 text-[11px] sm:text-xs font-bold rounded-full bg-[#10B981] hover:bg-[#059669] text-white shadow-md cursor-pointer"
+            className="h-9 sm:h-8.5 px-3.5 sm:px-4.5 text-xs sm:text-xs font-bold rounded-full bg-[#10B981] hover:bg-[#059669] text-white shadow-md cursor-pointer transition-all active:scale-98"
           >
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <div className="flex items-center gap-1.5 text-xs text-white truncate font-sans">
-                <span className="size-2 rounded-full bg-[#10B981] shrink-0 animate-pulse shadow-xs shadow-[#10B981]/80" />
-                <span className="font-bold text-white">{1400}+</span>
-                <span className="text-slate-200 truncate">Learners Joined Waitlist</span>
+            <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+              <div className="flex items-center gap-1.5 text-xs sm:text-xs text-white truncate font-sans">
+                <span className="font-extrabold text-white text-xs sm:text-xs tracking-tight">1,400+</span>
+                <span className="text-slate-100 font-medium truncate text-xs sm:text-xs">Learners Joined Waitlist</span>
               </div>
             </div>
-            <ArrowRight className="size-3 ml-1" />
+            <ArrowRight className="size-3.5 sm:size-3 ml-1 shrink-0" />
           </Button>
 
         </div>
