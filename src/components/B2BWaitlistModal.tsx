@@ -40,10 +40,11 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
   const [orgType, setOrgType] = useState<"enterprise" | "institution">(defaultType);
   const [workEmail, setWorkEmail] = useState("");
   const [orgName, setOrgName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [priorityQueue, setPriorityQueue] = useState(318);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!workEmail || !orgName) {
       toast.error(
@@ -54,14 +55,47 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
       return;
     }
 
-    const assigned = Math.floor(310 + Math.random() * 35);
-    setPriorityQueue(assigned);
-    setIsSubmitted(true);
-    toast.success(`Priority demo slot queued for ${orgName}!`);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/info@neuronexalabs.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: orgName,
+          email: workEmail,
+          organizationType: orgType === "enterprise" ? "Company / Enterprise" : "College / Institute",
+          message: `Join Waitlist request from ${orgName} (${orgType === "enterprise" ? "Company" : "College / Institute"}) with email ${workEmail}`,
+          _subject: `New Enterprise Inquiry | NexaDhi Waitlist (${orgName})`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success !== "false") {
+        const assigned = Math.floor(310 + Math.random() * 35);
+        setPriorityQueue(assigned);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        toast.success(`Priority demo slot queued for ${orgName}!`);
+      } else {
+        console.error("Submission rejected by server:", result);
+        alert("Message delivery failed. Please contact us directly on WhatsApp at +91 91104 35020.");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error("Network error during form submission:", error);
+      alert("Network error. Please reach us directly on WhatsApp at +91 91104 35020 or email info@neuronexalabs.com.");
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setIsSubmitting(false);
     setWorkEmail("");
     setOrgName("");
     onClose();
@@ -143,9 +177,10 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
                 type="submit"
                 variant="primary"
                 size="sm"
-                className="w-full font-semibold h-9 rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white cursor-pointer text-xs shadow-md mt-1"
+                disabled={isSubmitting}
+                className="w-full font-semibold h-9 rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white cursor-pointer text-xs shadow-md mt-1 disabled:opacity-50"
               >
-                <span>Request Priority Access</span>
+                <span>{isSubmitting ? "Submitting..." : "Request Priority Access"}</span>
                 <ArrowRight className="size-3.5 ml-1" />
               </Button>
             </form>

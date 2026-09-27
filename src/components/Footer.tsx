@@ -1,29 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShieldCheck, Mail, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
+import { ShieldCheck } from "lucide-react";
 
 interface FooterProps {
-  onOpenLearner: () => void;
+  onOpenLearner?: () => void;
   onOpenDemo: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenLearner, onOpenDemo }) => {
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail) return;
-    setIsSubscribed(true);
-    toast.success("Subscribed to NexaDhi release updates!");
-  };
-
+export const Footer: React.FC<FooterProps> = ({ onOpenDemo }) => {
   return (
     <footer className="bg-[#F8FAFC] border-t border-slate-200 text-[#334155] text-sm">
       {/* Main Footer Content */}
@@ -54,7 +41,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLearner, onOpenDemo }) => 
 
         {/* Footer Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-sans">
-          <p>© {new Date().getFullYear()} NexaDhi by Neuronexa Labs. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} NexaDhi by{" "}
+            <a
+              href="https://neuronexalabs.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#312E81] font-semibold hover:underline"
+            >
+              Neuronexa Labs
+            </a>
+            . All rights reserved.
+          </p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-[#312E81] transition-colors">
               Privacy Policy
@@ -76,3 +74,4 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLearner, onOpenDemo }) => 
     </footer>
   );
 };
+
