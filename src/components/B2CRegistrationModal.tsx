@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Sparkles, CheckCircle2, ArrowRight, Copy, Check, GraduationCap, School, Building2 } from "lucide-react";
+import { CheckCircle2, ArrowRight, GraduationCap, School, Building2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -25,31 +24,60 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [selectedRole, setSelectedRole] = useState<"learner" | "college" | "company">("learner");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [queueNumber, setQueueNumber] = useState(14843);
-  const [isCopied, setIsCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) {
-      toast.error("Please enter a valid email address");
+    if (!email || !fullName) {
+      toast.error("Please fill in all required fields");
       return;
     }
-    const assignedSpot = Math.floor(14800 + Math.random() * 80);
-    setQueueNumber(assignedSpot);
-    setIsSubmitted(true);
-    toast.success("Welcome aboard! Your spot in NexaDhi Early Access is locked in.");
-  };
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText("https://nexadhi.com?ref=early-access");
-    setIsCopied(true);
-    toast.info("Referral link copied!");
-    setTimeout(() => setIsCopied(false), 3000);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/info@neuronexalabs.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
+          email: email,
+          accountType:
+            selectedRole === "learner"
+              ? "Individual Learner"
+              : selectedRole === "college"
+              ? "College / Institution"
+              : "Company / Recruiter",
+          message: `Join Waitlist registration from ${fullName} (${selectedRole}) with email ${email}`,
+          _subject: `New Waitlist Registration | NexaDhi (${fullName})`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success !== "false") {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        toast.success("Welcome aboard! Your spot in NexaDhi Early Access is locked in.");
+      } else {
+        console.error("Submission rejected by server:", result);
+        alert("Message delivery failed. Please contact us directly on WhatsApp at +91 91104 35020.");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error("Network error during form submission:", error);
+      alert("Network error. Please reach us directly on WhatsApp at +91 91104 35020 or email info@neuronexalabs.com.");
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setIsSubmitted(false);
+    setIsSubmitting(false);
     setEmail("");
     setFullName("");
     setSelectedRole("learner");
@@ -57,7 +85,7 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && handleReset()}>
       <DialogContent className="sm:max-w-[410px] p-5 sm:p-6 rounded-2xl border border-slate-200 bg-white shadow-xl">
 
         {!isSubmitted ? (
@@ -142,62 +170,41 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
                 type="submit"
                 variant="primary"
                 size="sm"
-                className="w-full font-semibold h-9.5 rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white cursor-pointer text-xs shadow-md mt-1"
+                disabled={isSubmitting}
+                className="w-full font-semibold h-9.5 rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white cursor-pointer text-xs shadow-md mt-1 disabled:opacity-50"
               >
-                <span>Submit</span>
+                <span>{isSubmitting ? "Submitting..." : "Submit"}</span>
                 <ArrowRight className="size-3.5 ml-1" />
               </Button>
 
             </form>
           </>
         ) : (
-          /* Confirmation Success State */
-          <div className="text-center py-2 space-y-3 font-sans">
-            <div className="size-11 mx-auto rounded-full bg-emerald-50 text-[#10B981] border border-emerald-200 flex items-center justify-center">
+          /* Simple Success State */
+          <div className="p-6 sm:p-8 text-center space-y-4 font-sans">
+            <div className="size-12 mx-auto rounded-full bg-emerald-50 text-[#16A34A] border border-emerald-200 flex items-center justify-center">
               <CheckCircle2 className="size-6" />
             </div>
 
-            <div className="space-y-1">
-              <Badge variant="default" className="bg-emerald-50 text-emerald-800 border-emerald-200 text-[10px] px-2 py-0.5 rounded-full font-semibold">
-                Spot #{queueNumber} Confirmed
-              </Badge>
-              <h3 className="text-base font-bold text-[#312E81] font-heading">
-                You&apos;re On the List!
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-bold text-[#312E81] tracking-tight font-heading">
+                Thank You!
               </h3>
-              <p className="text-xs text-slate-500 max-w-xs mx-auto leading-normal">
-                Confirmation details sent to <strong className="text-[#312E81]">{email}</strong>.
+              <p className="text-xs sm:text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
+                We have received your details. Our team will get in touch with you shortly.
               </p>
             </div>
 
-            {/* Share to Skip Queue Box */}
-            <div className="p-3 rounded-xl bg-[#F8FAFC] border border-slate-200 text-left space-y-1.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-[#312E81] text-[11px]">Skip Ahead in Queue</span>
-                <span className="text-[10px] text-slate-400">Share your invite link</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="flex-1 px-3 py-1.5 rounded-full bg-white border border-slate-200 font-mono text-[10px] text-slate-600 truncate">
-                  nexadhi.com?ref=spot-{queueNumber}
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleCopyLink}
-                  className="rounded-full h-7 px-2.5 text-[11px] font-semibold border-slate-200 text-[#312E81]"
-                >
-                  {isCopied ? "Copied!" : <Copy className="size-3" />}
-                </Button>
-              </div>
+            <div className="pt-2">
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={handleReset}
+                className="w-full max-w-[140px] rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white text-xs font-semibold h-9 shadow-md cursor-pointer"
+              >
+                Close
+              </Button>
             </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              className="w-full rounded-full text-xs font-semibold border-slate-200 text-[#312E81] h-8"
-            >
-              Done
-            </Button>
           </div>
         )}
 
@@ -205,3 +212,4 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
     </Dialog>
   );
 };
+
