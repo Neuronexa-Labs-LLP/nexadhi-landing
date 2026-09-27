@@ -1,26 +1,249 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ========================================================================= */
+  /* MASTER THEME SYSTEM (Minimal + Premium SaaS Visual Design)                */
+  /* ========================================================================= */
+
+  /* Master Theme Variables */
+  --theme-font-heading: var(--font-sora), 'Sora', sans-serif;
+  --theme-font-body: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --theme-font-mono: var(--font-mono), 'JetBrains Mono', 'Fira Code', monospace;
+
+  --theme-color-heading: #312E81;
+  --theme-color-body: #334155;
+  --theme-color-subtle: #64748B;
+  --theme-color-muted: #94A3B8;
+  --theme-color-link: #312E81;
+  --theme-color-link-hover: #1E1B4B;
+  --theme-color-pill-text: #312E81;
+
+  --theme-gradient-start: #312E81;
+  --theme-gradient-mid: #4338CA;
+  --theme-gradient-end: #312E81;
+
+  --theme-primary: #312E81;
+  --theme-primary-hover: #1E1B4B;
+  --theme-primary-light: #EEF2FF;
+
+  --theme-secondary: #7C3AED;
+  --theme-secondary-light: #F5F3FF;
+
+  --theme-accent: #7C3AED;
+  --theme-accent-hover: #6D28D9;
+  --theme-accent-light: #F5F3FF;
+
+  --theme-growth: #10B981;
+  --theme-growth-light: #ECFDF5;
+
+  --theme-brand-green: #16A34A;
+  --theme-brand-green-light: #F0FDF4;
+
+  --theme-bg: #F8FAFC;
+  --theme-bg-subtle: #F1F5F9;
+
+  --theme-card-bg: #FFFFFF;
+  --theme-card-border: #E2E8F0;
+  --theme-card-border-hover: #CBD5E1;
+
+  --theme-input-border: #E2E8F0;
+  --theme-ring: #312E81;
+
+  --theme-grid-line: rgba(49, 46, 129, 0.05);
+  --theme-grid-dot: rgba(49, 46, 129, 0.25);
+  --theme-radar-beam: rgba(124, 58, 237, 0.12);
+
+  /* 1. TYPOGRAPHY */
+  --font-heading: var(--theme-font-heading, var(--font-sora), 'Sora', sans-serif);
+  --font-body: var(--theme-font-body, var(--font-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif);
+  --font-mono: var(--theme-font-mono, var(--font-mono), 'JetBrains Mono', monospace);
+
+  /* 2. FONT COLORS */
+  --color-heading: var(--theme-color-heading, #312E81);
+  --color-body: var(--theme-color-body, #334155);
+  --color-subtle: var(--theme-color-subtle, #64748B);
+  --color-muted: var(--theme-color-muted, #94A3B8);
+  --color-link: var(--theme-color-link, #312E81);
+  --color-link-hover: var(--theme-color-link-hover, #1E1B4B);
+  --color-pill-text: var(--theme-color-pill-text, #312E81);
+
+  /* 3. THEME PALETTE */
+  --color-primary: var(--theme-primary, #312E81);
+  --color-primary-hover: var(--theme-primary-hover, #1E1B4B);
+  --color-primary-light: var(--theme-primary-light, #EEF2FF);
+
+  --color-secondary: var(--theme-secondary, #7C3AED);
+  --color-secondary-light: var(--theme-secondary-light, #F5F3FF);
+
+  --color-accent: var(--theme-accent, #7C3AED);
+  --color-accent-hover: var(--theme-accent-hover, #6D28D9);
+  --color-accent-light: var(--theme-accent-light, #F5F3FF);
+
+  --color-growth: var(--theme-growth, #10B981);
+  --color-growth-light: var(--theme-growth-light, #ECFDF5);
+
+  --color-brand-green: var(--theme-brand-green, #16A34A);
+  --color-brand-green-light: var(--theme-brand-green-light, #F0FDF4);
+
+  --color-background: var(--theme-bg, #F8FAFC);
+  --color-background-subtle: var(--theme-bg-subtle, #F1F5F9);
+
+  --color-card-bg: var(--theme-card-bg, #FFFFFF);
+  --color-card-border: var(--theme-card-border, #E2E8F0);
+  --color-card-border-hover: var(--theme-card-border-hover, #CBD5E1);
+
+  --color-input-border: var(--theme-input-border, #E2E8F0);
+  --color-ring: var(--theme-ring, #312E81);
+
+  /* Standard tokens */
+  --background: var(--color-background);
+  --foreground: var(--color-heading);
+  --card: var(--color-card-bg);
+  --card-foreground: var(--color-heading);
+  --popover: var(--color-card-bg);
+  --popover-foreground: var(--color-heading);
+  --primary: var(--color-primary);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--color-secondary-light);
+  --secondary-foreground: var(--color-secondary);
+  --muted: var(--color-background-subtle);
+  --muted-foreground: var(--color-subtle);
+  --accent: var(--color-accent);
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: var(--color-card-border);
+  --input: var(--color-input-border);
+  --ring: var(--color-ring);
+  --radius: 1rem;
 }
 
 @theme inline {
+  --font-sora: var(--font-heading);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--color-body);
+  font-family: var(--font-body);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
+
+/* ========================================================================= */
+/* KEYFRAME ANIMATIONS (Minimal & Subtle Motion)                             */
+/* ========================================================================= */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+/* Fade up animation for sections */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Workflow Topology Field Animations */
+@keyframes topologyFlow {
+  0% {
+    stroke-dashoffset: 48;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-topology-flow {
+  animation: topologyFlow 2.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-topology-flow {
+    animation: none;
+  }
 }

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../../../../projrct"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"tfa.cache.autoClean": true,
+		"tfa.dashboard.includeSecondaryModels": true,
+		"tfa.dashboard.gaugeStyle": "classic-donut",
+		"liveServer.settings.multiRootWorkspaceName": "neuronexa"
+	}
+}
