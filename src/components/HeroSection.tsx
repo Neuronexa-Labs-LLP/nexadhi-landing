@@ -35,7 +35,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLearner, onOpenD
         </h1>
 
         <p className="text-base sm:text-lg text-[#334155] max-w-2xl mx-auto mb-8 leading-relaxed font-normal font-sans">
-          NexaDhi connects students, colleges, and recruiters on one platform. Build job-ready skills with AI-powered tools, and let companies discover you through performance.
+          NexaDhi by Neuronexa is an AI-powered platform that connects verified engineering talent with companies and institutions through skill-based assessments and smart recruitment tools.
         </p>
 
         <div className="flex flex-col items-center justify-center mb-6 max-w-xl mx-auto">

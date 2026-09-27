@@ -138,7 +138,11 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
               {/* Name / Company / Institute Input */}
               <div className="space-y-1">
                 <Label htmlFor="learner-name" className="text-[11px] font-bold text-[#312E81]">
-                  FULL NAME / COMPANY / INSTITUTE
+                  {selectedRole === "company"
+                    ? "COMPANY NAME"
+                    : selectedRole === "college"
+                    ? "INSTITUTE NAME"
+                    : "FULL NAME"}
                 </Label>
                 <Input
                   id="learner-name"
@@ -151,7 +155,11 @@ export const LearnerRegistrationModal: React.FC<LearnerModalProps> = ({ isOpen, 
 
               <div className="space-y-1">
                 <Label htmlFor="learner-email" className="text-[11px] font-bold text-[#312E81]">
-                  EMAIL ADDRESS
+                  {selectedRole === "company"
+                    ? "WORK EMAIL"
+                    : selectedRole === "college"
+                    ? "OFFICIAL EMAIL"
+                    : "EMAIL ADDRESS"}
                 </Label>
                 <Input
                   id="learner-email"
