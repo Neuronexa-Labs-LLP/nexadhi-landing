@@ -6,23 +6,15 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Building2,
   GraduationCap,
-  Sparkles,
   CheckCircle2,
   ArrowRight,
-  ShieldCheck,
-  Calendar,
-  Users2,
-  FileCheck,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -42,7 +34,6 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
   const [orgName, setOrgName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [priorityQueue, setPriorityQueue] = useState(318);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,8 +67,6 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
       const result = await response.json();
 
       if (response.ok && result.success !== "false") {
-        const assigned = Math.floor(310 + Math.random() * 35);
-        setPriorityQueue(assigned);
         setIsSubmitting(false);
         setIsSubmitted(true);
         toast.success(`Priority demo slot queued for ${orgName}!`);
@@ -186,55 +175,29 @@ export const DemoWaitlistModal: React.FC<DemoModalProps> = ({
             </form>
           </div>
         ) : (
-          /* Confirmation Success State - Compact */
-          <div className="p-5 text-center space-y-3 font-sans">
-            <div className="size-11 mx-auto rounded-full bg-emerald-50 text-[#10B981] border border-emerald-200 flex items-center justify-center">
+          /* Simple Success State */
+          <div className="p-6 sm:p-8 text-center space-y-4 font-sans">
+            <div className="size-12 mx-auto rounded-full bg-emerald-50 text-[#16A34A] border border-emerald-200 flex items-center justify-center">
               <CheckCircle2 className="size-6" />
             </div>
 
-            <div className="space-y-1">
-              <Badge className="bg-emerald-50 text-emerald-800 border-emerald-200 text-[10px] px-2 py-0.5 rounded-full font-semibold">
-                Priority Queue #{priorityQueue}
-              </Badge>
-              <h3 className="text-base font-bold text-[#312E81] tracking-tight font-heading">
-                Demo Request Confirmed
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-bold text-[#312E81] tracking-tight font-heading">
+                Thank You!
               </h3>
-              <p className="text-xs text-slate-500 max-w-xs mx-auto leading-normal">
-                Our team will prepare a walkthrough for <strong className="text-[#312E81]">{orgName || "your team"}</strong> and email <strong className="text-[#312E81]">{workEmail}</strong> shortly.
+              <p className="text-xs sm:text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
+                We have received your details. Our team will get in touch with you shortly.
               </p>
             </div>
 
-            <div className="p-2.5 bg-[#F8FAFC] border border-slate-200 rounded-xl text-left space-y-1 text-xs text-slate-600">
-              <div className="flex items-center gap-1.5 font-bold text-[#312E81] text-[11px]">
-                <Users2 className="size-3 text-[#312E81]" />
-                <span>Next Steps:</span>
-              </div>
-              <p className="text-[10px] text-slate-500 leading-normal pl-4.5">
-                • Look out for a calendar invite within 1 business day.<br />
-                • Staging sandbox with sample test credits will be provisioned.
-              </p>
-            </div>
-
-            <div className="flex gap-2 justify-center pt-1">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleReset}
-                className="rounded-full text-slate-600 border-slate-200 text-xs h-8 px-4"
-              >
-                Close
-              </Button>
+            <div className="pt-2">
               <Button
                 variant="primary"
                 size="sm"
-                onClick={() => {
-                  toast.info("Downloading NexaDhi Architecture Brief...");
-                  setTimeout(() => handleReset(), 1000);
-                }}
-                className="rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white flex items-center gap-1 text-xs h-8 px-4 cursor-pointer"
+                onClick={handleReset}
+                className="w-full max-w-[140px] rounded-full bg-[#312E81] hover:bg-[#1E1B4B] text-white text-xs font-semibold h-9 shadow-md cursor-pointer"
               >
-                <FileCheck className="size-3" />
-                Brief (PDF)
+                Close
               </Button>
             </div>
           </div>
