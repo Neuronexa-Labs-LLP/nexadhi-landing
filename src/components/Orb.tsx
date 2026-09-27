@@ -22,7 +22,7 @@ export default function Orb({
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
-  backgroundColor = '#000000',
+  backgroundColor = '#F8FAFC',
   color1 = '#7C3AED',
   color2 = '#10B981',
   color3 = '#312E81',

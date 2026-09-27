@@ -22,7 +22,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenLearner, onOpenD
   }, []);
 
   return (
-    <section className="relative min-h-[80vh] md:min-h-[100vh] pb-14  md:pb-18 pt-[250px] -mt-[100px] overflow-hidden flex flex-col justify-center">
+    <section className="relative min-h-[80vh] md:min-h-[100vh] pb-14  md:pb-18 pt-[250px] -mt-[100px] overflow-hidden flex flex-col bg-[#F8FAFC] justify-center">
       <HeroBackgroundAnimation />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 mt-[-50px]">
