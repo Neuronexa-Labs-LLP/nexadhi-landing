@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo }) => {
                 alt="NexaDhi"
                 width={280}
                 height={90}
-                className="h-16 sm:h-20 w-auto object-cover"
+                className="h-16 sm:h-20 w-auto object-contain"
               />
             </Link>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-sans">
