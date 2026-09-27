@@ -119,16 +119,16 @@ export function getDesktopTopology(persona: "learners" | "institutions" | "enter
       services: [
         { id: "goals", x: 0.08, y: 0.50, health: "healthy", label: "Set Your Goals", icon: "target", tier: "primary" },
         { id: "path", x: 0.24, y: 0.65, health: "healthy", label: "AI Prepare Path", icon: "compass", tier: "primary" },
-        { id: "psycho", x: 0.41, y: 0.35, health: "healthy", label: "Cognitive Matrix", icon: "brain", tier: "primary" },
-        { id: "sandbox", x: 0.58, y: 0.65, health: "healthy", label: "Sandbox & Learn", icon: "code", tier: "primary" },
+        { id: "sandbox", x: 0.41, y: 0.35, health: "healthy", label: "Sandbox & Learn", icon: "code", tier: "primary" },
+        { id: "psycho", x: 0.58, y: 0.65, health: "healthy", label: "Cognitive Matrix", icon: "brain", tier: "primary" },
         { id: "showcase", x: 0.75, y: 0.35, health: "healthy", label: "Showcase Skills", icon: "award", tier: "primary" },
         { id: "hired", x: 0.92, y: 0.50, health: "healthy", label: "Get Hired", icon: "briefcase", tier: "primary" },
       ],
       connections: [
         { from: "goals", to: "path", activity: 1.3 },
-        { from: "path", to: "psycho", activity: 0.8 },
-        { from: "psycho", to: "sandbox", activity: 1.4 },
-        { from: "sandbox", to: "showcase", activity: 1.0 },
+        { from: "path", to: "sandbox", activity: 1.4 },
+        { from: "sandbox", to: "psycho", activity: 0.8 },
+        { from: "psycho", to: "showcase", activity: 1.0 },
         { from: "showcase", to: "hired", activity: 1.5 },
       ],
     };
@@ -719,8 +719,8 @@ const MOBILE_STAGES: Record<"learners" | "institutions" | "enterprises", MobileS
   learners: [
     { step: "01", label: "Set Your Goals", icon: Target },
     { step: "02", label: "AI Prepare Path", icon: Compass },
-    { step: "03", label: "Cognitive Matrix", icon: BrainCircuit },
-    { step: "04", label: "Sandbox & Learn", icon: Code2 },
+    { step: "03", label: "Sandbox & Learn", icon: Code2 },
+    { step: "04", label: "Cognitive Matrix", icon: BrainCircuit },
     { step: "05", label: "Showcase Skills", icon: Award },
     { step: "06", label: "Get Hired", icon: Briefcase },
   ],

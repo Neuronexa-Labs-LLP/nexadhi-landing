@@ -263,7 +263,7 @@ export const HeroMockup: React.FC = () => {
                 <div className="flex items-center justify-between px-2.5 py-1.5 border-b border-slate-100/80">
                   <div className="flex items-center gap-1.5">
                     <Image
-                      src="/logo.png"
+                      src="/nexadhi-brand-logo.png"
                       alt="NexaDhi"
                       width={100}
                       height={32}
@@ -306,7 +306,7 @@ export const HeroMockup: React.FC = () => {
                   {/* Brand Logo */}
                   <div className="flex items-center gap-2 px-1.5 py-0.5">
                     <Image
-                      src="/logo.png"
+                      src="/nexadhi-brand-logo.png"
                       alt="NexaDhi"
                       width={120}
                       height={36}

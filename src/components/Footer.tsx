@@ -21,7 +21,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo }) => {
           <div className="max-w-lg">
             <Link href="/" className="inline-block">
               <Image
-                src="/logo.png"
+                src="/nexadhi-brand-logo.png"
                 alt="NexaDhi"
                 width={280}
                 height={90}

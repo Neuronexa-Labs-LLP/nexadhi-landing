@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLearner }) => {
         {/* Brand Logo */}
         <a href="#" className="flex items-center group py-1">
           <Image
-            src="/logo.png"
+            src="/nexadhi-brand-logo.png"
             alt="NexaDhi"
             width={240}
             height={80}
