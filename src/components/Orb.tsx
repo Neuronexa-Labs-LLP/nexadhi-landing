@@ -22,7 +22,7 @@ export default function Orb({
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
-  backgroundColor = '#F8FAFC',
+  backgroundColor = '#000000',
   color1 = '#7C3AED',
   color2 = '#10B981',
   color3 = '#312E81',
@@ -119,6 +119,11 @@ export default function Orb({
       return dot(vec4(31.316), n);
     }
 
+    vec4 extractAlpha(vec3 colorIn) {
+      float a = max(max(colorIn.r, colorIn.g), colorIn.b);
+      return vec4(colorIn.rgb / (a + 1e-5), a);
+    }
+
     const float innerRadius = 0.6;
     const float noiseScale = 0.65;
 
@@ -145,7 +150,7 @@ export default function Orb({
       float d0 = distance(uv, (r0 * invLen) * uv);
       float v0 = light1(1.0, 10.0, d0);
 
-      v0 *= smoothstep(r0 * 1.08, r0 * 0.97, len);
+      v0 *= smoothstep(r0 * 1.05, r0, len);
       float innerFade = smoothstep(r0 * 0.8, r0 * 0.95, len);
       v0 *= mix(innerFade, 1.0, bgLuminance * 0.7);
       float cl = cos(ang + iTime * 2.0) * 0.5 + 0.5;
@@ -160,21 +165,19 @@ export default function Orb({
       float v3 = smoothstep(innerRadius, mix(innerRadius, 1.0, 0.5), len);
       
       vec3 colBase = mix(color1, color2, cl);
+      float fadeAmount = mix(1.0, 0.1, bgLuminance);
       
       vec3 darkCol = mix(color3, colBase, v0);
       darkCol = (darkCol + v1) * v2 * v3;
       darkCol = clamp(darkCol, 0.0, 1.0);
       
-      vec3 lightCol = (colBase + v1) * mix(1.0, v2 * v3, 0.1);
+      vec3 lightCol = (colBase + v1) * mix(1.0, v2 * v3, fadeAmount);
       lightCol = mix(backgroundColor, lightCol, v0);
       lightCol = clamp(lightCol, 0.0, 1.0);
       
       vec3 finalCol = mix(darkCol, lightCol, bgLuminance);
       
-      float outerMask = smoothstep(r0 * 1.10, r0 * 0.96, len);
-      float alpha = clamp(v0 * 1.3 + (v2 * v3) * 0.95 + v1 * 0.4, 0.0, 1.0) * outerMask;
-      
-      return vec4(finalCol, alpha);
+      return extractAlpha(finalCol);
     }
 
     vec4 mainImage(vec2 fragCoord) {
@@ -347,8 +350,8 @@ function hslToRgb(h: number, s: number, l: number): Vec3 {
 function hexToVec3(color: string): Vec3 {
   if (color.startsWith('#')) {
     const hex = color.slice(1);
-    const fullHex = hex.length === 3
-      ? hex.split('').map(c => c + c).join('')
+    const fullHex = hex.length === 3 
+      ? hex.split('').map(c => c + c).join('') 
       : hex;
     const r = parseInt(fullHex.slice(0, 2), 16) / 255;
     const g = parseInt(fullHex.slice(2, 4), 16) / 255;
