@@ -35,7 +35,7 @@ export const PlatformHighlights: React.FC = () => {
                       <Cpu className="size-5" />
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] font-mono py-0.5 px-2 rounded-full bg-emerald-50 text-[#16A34A] font-bold border border-emerald-200/80">
+                      <span className="text-[10px] font-mono py-0.5 px-2 text-[#16A34A] font-bold ">
                         Diagnostics
                       </span>
                     </div>
@@ -60,7 +60,7 @@ export const PlatformHighlights: React.FC = () => {
                       <Code2 className="size-5" />
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] font-mono py-0.5 px-2 rounded-full bg-emerald-50 text-[#16A34A] font-bold border border-emerald-200/80">
+                      <span className="text-[10px] font-mono py-0.5 px-2 text-[#16A34A] font-bold ">
                         Compiler
                       </span>
                     </div>
@@ -85,7 +85,7 @@ export const PlatformHighlights: React.FC = () => {
                       <Brain className="size-5" />
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] font-mono py-0.5 px-2 rounded-full bg-emerald-50 text-[#16A34A] font-bold border border-emerald-200/80">
+                      <span className="text-[10px] font-mono py-0.5 px-2 text-[#16A34A] font-bold ">
                         Psychometrics
                       </span>
                     </div>
@@ -110,7 +110,7 @@ export const PlatformHighlights: React.FC = () => {
                       <ShieldCheck className="size-5" />
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] font-mono py-0.5 px-2 rounded-full bg-emerald-50 text-[#16A34A] font-bold border border-emerald-200/80">
+                      <span className="text-[10px] font-mono py-0.5 px-2 text-[#16A34A] font-bold ">
                         Anti-Cheat
                       </span>
                     </div>

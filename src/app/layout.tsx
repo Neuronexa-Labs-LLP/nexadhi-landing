@@ -35,6 +35,17 @@ export const metadata: Metadata = {
     default: "NexaDhi | AI Talent Assessment & Engineering Learning Platform",
     template: "%s | NexaDhi",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/icon.png?v=2", type: "image/png", sizes: "512x512" },
+      { url: "/favicon.png?v=2", type: "image/png", sizes: "32x32" },
+    ],
+    shortcut: "/favicon.ico?v=2",
+    apple: [
+      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    ],
+  },
   description:
     "Transform technical hiring and career growth with NexaDhi. Features adaptive AI coding assessments, in-browser sandboxes, anti-cheat proctoring, and verified credentials.",
   keywords: [
@@ -126,6 +137,9 @@ export default function RootLayout({
       className={`${sora.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
       <head>
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" href="/icon.png?v=2" type="image/png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
